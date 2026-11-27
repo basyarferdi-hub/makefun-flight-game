@@ -31,11 +31,16 @@ function measureTree(dir) {
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
+// The grader accepts only plain relative names in the output: a stray
+// dotfile (.gitkeep, .DS_Store) copied in makes the whole run fail, so the
+// copies below skip any path whose segments include a dot-name.
+const noDotNames = (path) => !path.split('/').some((seg) => seg.length > 1 && seg.startsWith('.'));
+
 mkdirSync(out, { recursive: true });
-cpSync(join(here, 'game'), join(out, 'game'), { recursive: true });
+cpSync(join(here, 'game'), join(out, 'game'), { recursive: true, filter: noDotNames });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) {
-  cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
+  cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true, filter: noDotNames });
 }
 
 // The caps below are the gate's own (see the competition's RULES.txt): the
