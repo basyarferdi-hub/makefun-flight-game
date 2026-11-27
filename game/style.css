@@ -1,0 +1,93 @@
+/* Kestrel Skies HUD and menu styling: dark glass panels, amber instrument text. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1622; }
+body { font-family: "Segoe UI", Verdana, Geneva, sans-serif; color: #eaf4ff; }
+#app { position: fixed; inset: 0; }
+#gl { display: block; width: 100%; height: 100%; }
+.hidden { display: none !important; }
+
+.panel {
+  position: absolute;
+  background: rgba(8, 20, 34, 0.62);
+  border: 1px solid rgba(140, 200, 255, 0.35);
+  border-radius: 10px;
+  padding: 10px 14px;
+  backdrop-filter: blur(3px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+
+/* Mission card, top-left */
+#mission-card { top: 16px; left: 16px; min-width: 300px; }
+#mission-name { font-size: 19px; font-weight: 700; letter-spacing: 1.5px; color: #ffd97a; }
+#mission-objective { font-size: 14px; margin-top: 3px; color: #cfe6ff; }
+#mission-stats { display: flex; gap: 22px; margin-top: 7px; font-family: Consolas, monospace; font-size: 17px; color: #9fe8ff; }
+
+/* Score and condition bars, top-right */
+#score-card { top: 16px; right: 16px; width: 240px; }
+#score-value { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: #ffd97a; margin-bottom: 6px; }
+.bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 1px; margin-top: 4px; }
+.bar-row span { width: 66px; color: #cfe6ff; }
+.bar { flex: 1; height: 10px; background: rgba(255,255,255,0.15); border-radius: 5px; overflow: hidden; }
+.bar > div { height: 100%; width: 100%; border-radius: 5px; }
+#fuel-fill { background: linear-gradient(90deg, #ffb340, #ffd97a); }
+#hull-fill { background: linear-gradient(90deg, #57d977, #a5f2b8); }
+
+/* Artificial horizon, bottom-left */
+#horizon-card { left: 16px; bottom: 16px; text-align: center; padding: 8px; }
+#horizon { display: block; }
+#heading-readout { font-family: Consolas, monospace; font-size: 17px; color: #9fe8ff; margin-top: 4px; }
+
+/* Digital readouts, bottom-right */
+#readouts { right: 16px; bottom: 16px; display: flex; gap: 20px; }
+.readout { text-align: right; }
+.readout label { display: block; font-size: 11px; letter-spacing: 2px; color: #8fb8dd; }
+.readout span { font-family: Consolas, monospace; font-size: 34px; font-weight: 700; color: #ffffff; }
+.readout small { font-size: 13px; color: #8fb8dd; margin-left: 3px; }
+
+/* Centre flashes and warnings */
+#flash {
+  position: absolute; top: 24%; left: 50%; transform: translateX(-50%);
+  font-size: 40px; font-weight: 800; letter-spacing: 2px; color: #ffd97a;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8); opacity: 0; transition: opacity 0.25s;
+  pointer-events: none; white-space: nowrap;
+}
+#stall-warning {
+  position: absolute; top: 34%; left: 50%; transform: translateX(-50%);
+  font-size: 30px; font-weight: 800; letter-spacing: 6px; color: #ff5d5d;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9); animation: blink 0.5s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0.15; } }
+
+/* Title menu */
+#menu {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(180deg, rgba(6,16,28,0.25) 0%, rgba(6,16,28,0.55) 78%, rgba(6,16,28,0.8) 100%);
+}
+#menu h1 { font-size: 74px; letter-spacing: 10px; font-weight: 900; color: #ffffff; text-shadow: 0 4px 24px rgba(0,0,0,0.75); }
+#menu .tagline { margin-top: 10px; font-size: 18px; line-height: 1.5; color: #dceeff; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+#sortie-list { display: flex; gap: 14px; margin-top: 30px; }
+.sortie {
+  width: 250px; padding: 14px 16px; text-align: left; cursor: pointer;
+  background: rgba(8, 24, 42, 0.78); color: #eaf4ff;
+  border: 1px solid rgba(140, 200, 255, 0.45); border-radius: 12px;
+}
+.sortie:hover { border-color: #ffd97a; background: rgba(20, 44, 70, 0.9); }
+.sortie b { display: block; font-size: 17px; letter-spacing: 1px; color: #ffd97a; margin-bottom: 5px; }
+.sortie span { font-size: 13.5px; line-height: 1.45; color: #cfe6ff; }
+#menu .controls { margin-top: 28px; font-family: Consolas, monospace; font-size: 14.5px; color: #9fc6ee; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+
+/* End-of-sortie card */
+#endcard {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 480px; text-align: center; padding: 28px 30px;
+  background: rgba(8, 20, 34, 0.88); border: 1px solid rgba(140, 200, 255, 0.5); border-radius: 14px;
+}
+#endcard h2 { font-size: 38px; letter-spacing: 3px; color: #ffd97a; }
+#end-detail { margin-top: 10px; font-size: 16.5px; line-height: 1.55; color: #dceeff; }
+#end-score { margin-top: 12px; font-family: Consolas, monospace; font-size: 21px; color: #9fe8ff; }
+#again {
+  margin-top: 18px; padding: 11px 26px; font-size: 16px; font-weight: 700; letter-spacing: 1px;
+  color: #0b1622; background: #ffd97a; border: none; border-radius: 9px; cursor: pointer;
+}
+#again:hover { background: #ffe49a; }

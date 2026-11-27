@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Skies — Bush Pilot Flight Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="gl"></canvas>
+
+  <!-- Flight instruments, always on while flying -->
+  <div id="hud" class="hidden">
+    <div id="mission-card" class="panel">
+      <div id="mission-name">SORTIE 1 · RING RUN</div>
+      <div id="mission-objective">Fly through every ring, then land on the strip.</div>
+      <div id="mission-stats">
+        <span id="stat-rings">RINGS 0/8</span>
+        <span id="stat-time">00:00</span>
+      </div>
+    </div>
+
+    <div id="score-card" class="panel">
+      <div id="score-value">SCORE 0</div>
+      <div class="bar-row"><span>FUEL</span><div class="bar"><div id="fuel-fill"></div></div></div>
+      <div class="bar-row"><span>AIRFRAME</span><div class="bar"><div id="hull-fill"></div></div></div>
+    </div>
+
+    <div id="horizon-card" class="panel">
+      <canvas id="horizon" width="150" height="150"></canvas>
+      <div id="heading-readout">HDG 180</div>
+    </div>
+
+    <div id="readouts" class="panel">
+      <div class="readout"><label>IAS</label><span id="ro-speed">0</span><small>kt</small></div>
+      <div class="readout"><label>ALT</label><span id="ro-alt">0</span><small>ft</small></div>
+      <div class="readout"><label>V/S</label><span id="ro-vs">0</span><small>fpm</small></div>
+      <div class="readout"><label>THR</label><span id="ro-thr">0</span><small>%</small></div>
+    </div>
+
+    <div id="flash"></div>
+    <div id="stall-warning" class="hidden">STALL</div>
+  </div>
+
+  <!-- Title / sortie select -->
+  <div id="menu">
+    <h1>KESTREL&nbsp;SKIES</h1>
+    <p class="tagline">A bush-pilot flight game. Mind your throttle, respect the stall,<br>
+    thread the rings and bring her home to the strip.</p>
+    <div id="sortie-list">
+      <button data-sortie="0" class="sortie"><b>1 · RING RUN</b><span>Eight rings down the valley, then land.</span></button>
+      <button data-sortie="1" class="sortie"><b>2 · SUMMIT CIRCUIT</b><span>Six rings climbing around the peaks.</span></button>
+      <button data-sortie="2" class="sortie"><b>3 · SHORT FIELD</b><span>One ring, then a slow, steep landing on the short strip.</span></button>
+    </div>
+    <p class="controls">W / S throttle &nbsp;·&nbsp; ↑ / ↓ pitch &nbsp;·&nbsp; ← / → bank &nbsp;·&nbsp; A / D rudder &nbsp;·&nbsp; SPACE brake &nbsp;·&nbsp; R restart</p>
+  </div>
+
+  <!-- End-of-sortie card -->
+  <div id="endcard" class="hidden">
+    <h2 id="end-title">LANDED</h2>
+    <p id="end-detail"></p>
+    <p id="end-score"></p>
+    <button id="again">FLY AGAIN (R)</button>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
